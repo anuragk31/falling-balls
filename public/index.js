@@ -79,7 +79,7 @@ function DotGame(){
         updateSpeed(1);
     }
     function updateSpeed(value) {
-        Dot.DropSpeed = value;
+        Dot.DropSpeed = isRunning ? value : 0;
     }
 
     function updateScore(value) {
@@ -92,7 +92,9 @@ function DotGame(){
             startButton.innerHTML = "Start";
             clearInterval(dotInterval);
             updateSpeed(0);
+            isRunning = false;
         } else {
+            isRunning = true;
             startButton.innerHTML = "Pause";
             updateSpeed(document.querySelector("#dot-speed").value);
             dotInterval = setInterval(()=>{
@@ -104,7 +106,6 @@ function DotGame(){
                 }
             }, 1000);
         }
-        isRunning = !isRunning;
     }
 
 
