@@ -35,23 +35,31 @@ function DotGame(){
         this.element = dotElement;
     };
 
+    Dot.prototype.verifyXViewPort = function(){
+        let frameRate = 1/60;
+        let playgroundHeight = this.parent.offsetHeight;
+        let positionY = parseFloat(this.element.style.top);
+        let newPosition = positionY + (frameRate * Dot.DropSpeed * 10);
+        if (newPosition > playgroundHeight) {
+            this.detach();
+        } else {
+            this.element.style.top = newPosition + "px";
+        }
+    };
+    Dot.prototype.verifyYViewPort = function(){
+        let viewPortWidth = window.outerWidth;
+        let dotLastPixel = parseFloat(this.element.style.left) + this.diameter/2;
+        (viewPortWidth < dotLastPixel) && this.detach();
+    };
+
     Dot.prototype.startMove = function(parentElement){
         this.parent = parentElement;
         parentElement.appendChild(this.element);
-        let playgroundHeight = parentElement.offsetHeight;
-        let frameRate = 1/60;
         function updateFrame(){
             Dot.isAnimationFramePaused = false;
             if(this.element.parentNode) {
-                if (Dot.DropSpeed != 0) {
-                    let positionY = parseFloat(this.element.style.top);
-                    let newPosition = positionY + (frameRate * Dot.DropSpeed * 10);
-                    if (newPosition > playgroundHeight) {
-                        this.detach();
-                    } else {
-                        this.element.style.top = newPosition + "px";
-                    }
-                }
+                (Dot.DropSpeed != 0) && this.verifyXViewPort();
+                this.verifyYViewPort();
                 window.requestAnimationFrame(updateFrame.bind(this));
             }
         }
