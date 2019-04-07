@@ -4,6 +4,7 @@ function DotGame(){
         this.diameter = (Math.ceil(Math.random() * 10) * 10);
     }
     Dot.DropSpeed = 1;
+    Dot.isAnimationFramePaused = false;
 
     Dot.prototype.onClick = function(clickHandler){
         let dotValue = (11 - this.diameter/10);
@@ -40,6 +41,7 @@ function DotGame(){
         let playgroundHeight = parentElement.offsetHeight;
         let frameRate = 1/60;
         function updateFrame(){
+            Dot.isAnimationFramePaused = false;
             if(this.element.parentNode) {
                 if (Dot.DropSpeed != 0) {
                     let positionY = parseFloat(this.element.style.top);
@@ -86,9 +88,12 @@ function DotGame(){
             startButton.innerHTML = "Pause";
             updateSpeed(document.querySelector("#dot-speed").value);
             dotInterval = setInterval(()=>{
-                let dot = new Dot();
-                dot.createElement(updateScore);
-                dot.startMove(playGround)
+                if(!Dot.isAnimationFramePaused) {
+                    Dot.isAnimationFramePaused = true;
+                    let dot = new Dot();
+                    dot.createElement(updateScore);
+                    dot.startMove(playGround)
+                }
             }, 1000);
         }
         isRunning = !isRunning;
