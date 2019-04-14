@@ -12,6 +12,70 @@ html {
     height: 100%;
     overflow: hidden;
 
+    #overlay, #modal {
+      position: fixed;
+      display: none;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 2;
+      cursor: pointer;
+
+      .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        border: 1px solid #888;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 3px;
+        box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
+        @include sm {
+          width: 40%;
+        }
+        @include md{
+          width: 30%;
+        }
+      }
+
+      .modal-header {
+        padding: 5px 15px;
+        border-bottom: 1px solid #e5e5e5;
+
+        h4{
+          margin: 5px;
+        }
+      }
+
+      .modal-body {
+        position: relative;
+        padding: 15px;
+      }
+
+      .modal-footer {
+        padding: 15px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .timer-label{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: 50px;
+        color: white;
+        transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+      }
+    }
+
+
+
     #controls {
       box-sizing: border-box;
       background-color: #f4f5f7;
@@ -26,27 +90,38 @@ html {
       div.container {
         box-sizing: border-box;
         display: flex;
-        flex-direction: row;
+        flex-wrap: wrap;
+        flex-direction: column;
         justify-content: space-between;
+        @include md{
+          flex-direction: row;
+        }
 
+        span.score, span.maxScore, span.time{
+          align-self: flex-start;
+          font-size: 25px;
+          text-align: center;
+        }
         .score-label {
           width: 150px;
-          font-size: 28px;
-          align-self: flex-start ;
-          padding: 20px;
-          text-align: center;
+          padding: 10px;
+        }
+
+        span.btn{
+          align-self: flex-start;
+          @include md{
+            align-self: flex-end;
+          }
         }
 
         button {
-          width: 200px;
-          align-self: flex-end;
-          min-width: 130px;
+          width: 120px;
           background-color: white;
-          color: #0052CC;
+          color: black;
           box-shadow: #888888 5px 5px 5px;
           font-size: 22px;
           font-weight: bold;
-          padding: 20px;
+          padding: 10px 0px;
           margin-right: 20px;
           text-align: center;
           text-shadow: 0px 2px 1px rgba(0, 0, 0, .2);
@@ -55,12 +130,23 @@ html {
           &:hover,
           &:active {
             color: white;
-            background-color: #0052CC;
             border-color: #271ACC;
           }
           &:focus {
             box-shadow: 0 0 0 3px rgba(#271ACC, .25);
           }
+          @include lg{
+            width: 200px;
+          }
+        }
+        .start-btn{
+          background-color: #76e076;
+        }
+        .start-btn.running{
+          background-color: #ffff00;
+        }
+        .restart-btn{
+          background-color: #ff7018;
         }
       }
 
@@ -72,7 +158,7 @@ html {
           width: 40%;
         }
         box-sizing: border-box;
-        padding: 20px;
+        padding: 20px 0px;
         input {
           width: 100%;
           font-size: 14px;

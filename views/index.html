@@ -8,10 +8,42 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div id="overlay">
+    <label class="timer-label">Overlay Text</label>
+</div>
+
+<div id="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Game Over</h4>
+        </div>
+        <div class="modal-body">
+            <label class="modal-body-label"></label>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-close">Close</button>
+        </div>
+    </div>
+</div>
+
 <section id="controls">
     <div class="container">
-        <label class="score-label"></label>
-        <button class="start-btn">Start</button>
+        <span class="containerElement score">
+            <label>Score:</label>
+            <label class="score-label"></label>
+        </span>
+        <span class="containerElement maxScore">
+            <label>Highest Score:</label>
+            <label class="highScore-label"></label>
+        </span>
+        <span class="containerElement time">
+            <label>Time left:</label>
+            <label class="time-label"></label>
+        </span>
+        <span class="containerElement btn">
+            <button class="restart-btn">Reset</button>
+            <button class="start-btn">Start</button>
+        </span>
     </div>
     <div id="slider">
         <input id="dot-speed" type="range" min="10" max="100" value="1"/>
@@ -19,6 +51,7 @@
 </section>
 <main role="main">
 </main>
+<script src="/Dot.js"></script>
 <script src="/index.js"></script>
 </body>
 </html>
