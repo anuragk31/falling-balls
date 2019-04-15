@@ -23,26 +23,21 @@ function DotGame(){
         startButton.classList.remove("running");
         highestScore = localStorage.getItem("maxScore") ? JSON.parse(localStorage.getItem("maxScore")) : 0;
         gameRunningTime = 60;
-        timerTextElement.innerHTML = gameRunningTime.toString();
+        updateGameTimer();
         startButton.innerHTML = "Start";
         dotInterval && clearInterval(dotInterval);
         Dot.removeAll();
     }
 
-    function startGameTimer(){
-        gameTimerId = setInterval(()=>{
-           if(isRunning && !Dot.isAnimationFramePaused){
-               gameRunningTime--;
-               timerTextElement.innerHTML = gameRunningTime.toString();
-               (highestScore < currentScore) && updateMaxScore();
-               if(gameRunningTime == 0){
-                   gameTimerId && clearInterval(gameTimerId);
-                   gameTimerId = null;
-                   updateMaxScore();
-                   showGameOverModal();
-               }
-           }
-        },1000);
+    function updateGameTimer(){
+       timerTextElement.innerHTML = gameRunningTime.toString();
+       (highestScore < currentScore) && updateMaxScore();
+       if(gameRunningTime == 0){
+           isRunning = false;
+           updateMaxScore();
+           showGameOverModal();
+       }
+       gameRunningTime--;
     }
 
     function updateMaxScore(){
@@ -86,16 +81,16 @@ function DotGame(){
         } else {
             await overlayOn();
             isRunning = true;
-            startGameTimer();
             startButton.classList.add("running");
             startButton.innerHTML = "Pause";
             updateSpeed(slider.value);
             dotInterval = setInterval(()=>{
-                if(!Dot.isAnimationFramePaused) {
+                if(isRunning && !Dot.isAnimationFramePaused) {
+                    updateGameTimer();
                     Dot.isAnimationFramePaused = true;
                     let dot = new Dot();
                     dot.createElement(updateScore);
-                    dot.startMove(playGround)
+                    dot.startMove(playGround);
                 }
             }, 1000);
         }

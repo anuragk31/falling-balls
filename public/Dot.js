@@ -7,7 +7,7 @@ Dot.SpeedPerSecond = 2; //Default is 10px but this is looking too fast so making
 
 Dot.prototype.onClick = function(clickHandler){
     let dotValue = (11 - this.diameter/10);
-    if (Game.isRunning) {
+    if (Game.isRunning()) {
         this.detach();
         clickHandler(dotValue);
     }
