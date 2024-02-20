@@ -1,0 +1,235 @@
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+html body {
+    background-color: white;
+    font-family: "Charlie Text", "-apple-system", "Segoe UI", Roboto, "Noto Sans", sans-serif;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+html body #overlay, html body #modal {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+html body #overlay .modal-content, html body #modal .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 3px;
+    box-shadow: 0 4px 8px 0 #000 33, 0 6px 20px 0 #000 30;
+}
+@media (min-width: 576px) {
+    html body #overlay .modal-content, html body #modal .modal-content {
+        width: 40%;
+   }
+}
+@media (min-width: 600px) {
+    html body #overlay .modal-content, html body #modal .modal-content {
+        width: 30%;
+   }
+}
+html body #overlay .modal-content .modal-header, html body #modal .modal-content .modal-header {
+    padding: 5px 15px;
+    border-bottom: 1px solid #e5e5e5;
+}
+html body #overlay .modal-content .modal-header h4, html body #modal .modal-content .modal-header h4 {
+    margin: 5px;
+}
+html body #overlay .modal-content .modal-body, html body #modal .modal-content .modal-body {
+    position: relative;
+    padding: 15px;
+}
+html body #overlay .modal-content .modal-footer, html body #modal .modal-content .modal-footer {
+    padding: 15px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+}
+html body #overlay .modal-content .modal-footer button, html body #modal .modal-content .modal-footer button {
+    width: 100px;
+    height: 30px;
+}
+html body #overlay .timer-label, html body #modal .timer-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+html body #controls {
+    box-sizing: border-box;
+    background-color: #f4f5f7;
+    color: black;
+    opacity: 0.9;
+    overflow: hidden;
+    padding: 20px 20px 0;
+    position: relative;
+    border-bottom: 1px solid #091e42;
+    width: 100%;
+}
+html body #controls div.container {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+}
+@media (min-width: 600px) {
+    html body #controls div.container {
+        flex-direction: row;
+   }
+}
+html body #controls div.container span.score, html body #controls div.container span.maxScore, html body #controls div.container span.time {
+    align-self: flex-start;
+    font-size: 25px;
+    text-align: center;
+}
+html body #controls div.container .score-label {
+    width: 150px;
+    padding: 10px;
+}
+html body #controls div.container span.btn {
+    align-self: flex-start;
+}
+@media (min-width: 600px) {
+    html body #controls div.container span.btn {
+        align-self: flex-end;
+   }
+}
+html body #controls div.container button {
+    width: 120px;
+    background-color: white;
+    color: black;
+    box-shadow: #888 5px 5px 5px;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 10px 0px;
+    margin-right: 20px;
+    text-align: center;
+    text-shadow: 0px 2px 1px rgba(0, 0, 0, .2);
+    border-radius: 3px;
+    border-color: #cbcdd1;
+}
+html body #controls div.container button:hover, html body #controls div.container button:active {
+    color: white;
+    border-color: #271acc;
+}
+html body #controls div.container button:focus {
+    box-shadow: 0 0 0 3px rgba(39, 26, 204, .25);
+}
+@media (min-width: 1200px) {
+    html body #controls div.container button {
+        width: 200px;
+   }
+}
+html body #controls div.container .start-btn {
+    background-color: #76e076;
+}
+html body #controls div.container .start-btn.running {
+    background-color: #ff0;
+}
+html body #controls div.container .restart-btn {
+    background-color: #ff7018;
+}
+html body #controls #slider {
+    box-sizing: border-box;
+    padding: 20px 0px;
+}
+@media (min-width: 576px) {
+    html body #controls #slider {
+        width: 100%;
+   }
+}
+@media (min-width: 600px) {
+    html body #controls #slider {
+        width: 40%;
+   }
+}
+html body #controls #slider input {
+    width: 100%;
+    font-size: 14px;
+}
+html body main {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+html body main .dot {
+    border-radius: 50%;
+    cursor: pointer;
+    display: block;
+    opacity: 0.6;
+    position: absolute;
+    transition: opacity 0.5s ease;
+    border: 1px solid #cdcdcd;
+}
+html body main .dot:hover {
+    border-color: black;
+    box-shadow: 0 0 0 3px rgba(164, 178, 188, 0.2);
+}
+html body main .dot.color-10 {
+    background-color: #4416f7;
+}
+html body main .dot.color-20 {
+    background-color: #d3ff2f;
+}
+html body main .dot.color-30 {
+    background-color: #23ff1d;
+}
+html body main .dot.color-40 {
+    background-color: #228b22;
+}
+html body main .dot.color-50 {
+    background-color: #ffcb1a;
+}
+html body main .dot.color-60 {
+    background-color: #ff864c;
+}
+html body main .dot.color-70 {
+    background-color: #297eff;
+}
+html body main .dot.color-80 {
+    background-color: #ff2ad9;
+}
+html body main .dot.color-90 {
+    background-color: #9e2fff;
+}
+html body main .dot.color-100 {
+    background-color: #ffa0a2;
+}
+input[type=range] {
+    -webkit-appearance: none;
+    background: transparent;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: #fff;
+    border: 1px solid black;
+    height: 18px;
+    width: 18px;
+    margin-top: -8px;
+    border-radius: 99px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 4px;
+    background: #000;
+}
